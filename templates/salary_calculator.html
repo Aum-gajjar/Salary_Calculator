@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Salary Calculator{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Salary Calculator</h1>
+    <form method="post" action="{{ url_for('salary_calculator') }}">
+        <div class="form-group">
+            <label for="worker_name">Worker Name:</label>
+            <input type="text" name="worker_name" class="form-control" required>
+        </div>
+        {% for category in categories %}
+            <h2>{{ category }}</h2>
+            {% for subcategory in subcategories[category] %}
+                <div class="form-group">
+                    <label for="{{ category }}_{{ subcategory }}_tasks_done">{{ subcategory }} Tasks Done:</label>
+                    <input type="number" name="{{ category }}_{{ subcategory }}_tasks_done" class="form-control" required>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="form-group">
+            <br>
+            <button type="submit" class="btn btn-info">Calculate Salary</button>
+        </div>
+        <br>
+    </form>
+{% endblock %}
